@@ -21,4 +21,5 @@ Ovaj projekat je razvijen kao deo predmeta **„Internet Tehnologije“** i pred
 ## Instalacija i pokretanje projekta
 
 - Java 17 SDK: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- IntelliJ IDEA 2025.2.4 - https://www.jetbrains.com/idea/download/?section=windows
 - Spring Boot inicijalizacija projekta - https://start.spring.io/
