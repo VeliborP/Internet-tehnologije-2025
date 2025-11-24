@@ -20,4 +20,5 @@ Ovaj projekat je razvijen kao deo predmeta **„Internet Tehnologije“** i pred
 
 ## Instalacija i pokretanje projekta
 
+- Java 17 SDK: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 ...
