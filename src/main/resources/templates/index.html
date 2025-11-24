@@ -1,0 +1,17 @@
+<html>
+<head><title>Home Page</title></head>
+<body>
+<h1>Hello !</h1>
+<p>Welcome to Spring boot App</p>
+
+<h1>Lista tehnologija</h1>
+
+<ul>
+    <li th:each="tech : ${technologies}"
+        th:text="${tech}">
+        Technology Name
+    </li>
+</ul>
+
+</body>
+</html>
