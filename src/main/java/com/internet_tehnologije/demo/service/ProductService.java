@@ -1,6 +1,6 @@
 package com.internet_tehnologije.demo.service;
 import com.internet_tehnologije.demo.model.Product;
-import com.internet_tehnologije.demo.repository.ProductRepository;
+import com.internet_tehnologije.demo.repository.IProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-    private final ProductRepository repo;
+    private final IProductRepository repo;
 
-    public ProductService(ProductRepository repo) {
+    public ProductService(IProductRepository repo) {
         this.repo = repo;
     }
 

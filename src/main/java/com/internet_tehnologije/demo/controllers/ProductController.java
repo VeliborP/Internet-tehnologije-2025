@@ -14,15 +14,15 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService service;
+    private final ProductService productService;
 
-    public ProductController(ProductService service) {
-        this.service = service;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping()
     public String list(Model model) {
-        List<Product> products = service.findAll();
+        List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         model.addAttribute("pageTitle", "Products List");
 
@@ -47,13 +47,13 @@ public class ProductController {
             model.addAttribute("fragment", "products/form");
             return "layouts/main";
         }
-        service.save(product);
+        productService.save(product);
         return "redirect:/products";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
-        var opt = service.findById(id);
+        var opt = productService.findById(id);
         if (opt.isEmpty()) {
             return "redirect:/products";
         }
@@ -66,7 +66,7 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        service.deleteById(id);
+        productService.deleteById(id);
         return "redirect:/products";
     }
 }
