@@ -16,6 +16,9 @@ public class HomeController {
         List<String> items = List.of("Java", "Spring Boot", "Thymeleaf", "MySQL");
 
         model.addAttribute("technologies", items);
-        return "index";
+        model.addAttribute("pageTitle", "Products List");
+
+        model.addAttribute("fragment", "index");
+        return "layouts/main";
     }
 }

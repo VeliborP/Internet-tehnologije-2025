@@ -1,11 +1,13 @@
 package com.internet_tehnologije.demo.controllers;
 import com.internet_tehnologije.demo.model.Product;
+import com.internet_tehnologije.demo.service.CategoryService;
 import com.internet_tehnologije.demo.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,9 +17,11 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping()
@@ -35,8 +39,9 @@ public class ProductController {
         Product p = new Product();
         p.setPrice(BigDecimal.ZERO);
         model.addAttribute("product", p);
-        model.addAttribute("action", "Create");
+        model.addAttribute("categories", categoryService.findAll());
 
+        model.addAttribute("action", "Create");
         model.addAttribute("fragment", "products/form");
         return "layouts/main";
     }
@@ -58,6 +63,8 @@ public class ProductController {
             return "redirect:/products";
         }
         model.addAttribute("product", opt.get());
+        model.addAttribute("categories", categoryService.findAll());
+
         model.addAttribute("action", "Update");
         model.addAttribute("fragment", "products/form");
 
@@ -65,8 +72,15 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes ra) {
+        var productOpt = productService.findById(id);
+        if (productOpt.isEmpty()) {
+            ra.addFlashAttribute("error", "Product not found.");
+            return "redirect:/products";
+        }
+
         productService.deleteById(id);
+        ra.addFlashAttribute("success", "Product deleted successfully.");
         return "redirect:/products";
     }
 }

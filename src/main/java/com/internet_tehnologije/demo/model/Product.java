@@ -28,6 +28,14 @@ public class Product {
     @DecimalMin("0.01")
     private BigDecimal price;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+            name = "category_id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_product_category")
+    )
+    private Category category;
+
     public Product() {}
 
     // getters & setters
@@ -42,4 +50,7 @@ public class Product {
 
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) { this.price = price; }
+
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category; }
 }
