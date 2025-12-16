@@ -10,6 +10,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -17,6 +18,7 @@
         <tr th:each="category : ${categories}">
             <td th:text="${category.id}"></td>
             <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
             <td>
                 <a class="btn btn-sm btn-warning" th:href="@{'/categories/edit/' + ${category.id}}">Edit</a>
                 <a class="btn btn-sm btn-danger" th:href="@{'/categories/delete/' + ${category.id}}"

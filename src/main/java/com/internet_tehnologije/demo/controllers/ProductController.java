@@ -49,6 +49,7 @@ public class ProductController {
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("categories", categoryService.findAll());
             model.addAttribute("fragment", "products/form");
             return "layouts/main";
         }
